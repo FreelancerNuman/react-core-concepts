@@ -10,15 +10,21 @@ function App() {
   const style = {
     color: "blue",
   };
-  const names = ["Jafar", "Someone", "Someone2"];
+  const names = ["Jafar", "Fahiyan", "Sayed", "Wasim", "Salman"];
   const products = [
     { name: "Drone", price: "$100" },
     { name: "Headphone", price: "$34" },
     { name: "Phone", price: "$300" },
     { name: "Airpod", price: "$20" },
   ];
+
   return (
     <div className="App">
+      <ul>
+        {names.map((name) => (
+          <li>{name}</li>
+        ))}
+      </ul>
       <p style={style}>Hello, I'm {person.name}.</p>
       <p style={{ backgroundColor: "yellow", color: "black" }}>
         I'm {person.age} years old.
@@ -30,14 +36,15 @@ function App() {
       <Person name="Ryan" dBirth="2014"></Person>
       <Product name={products[0].name} price={products[0].price}></Product>
       <Product name={products[1].name} price={products[1].price}></Product>
-      <Product name={products[2].name} price={products[2].price}></Product>
-      <Product name={products[3].name} price={products[3].price}></Product>
+
+      {products.map((product) => (
+        <Product name={product.name} price={product.price}></Product>
+      ))}
     </div>
   );
 }
 
 function Person(props) {
-  console.log(props);
   return (
     <div
       style={{
