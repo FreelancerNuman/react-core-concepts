@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -25,21 +25,59 @@ function App() {
           <li>{name}</li>
         ))}
       </ul>
+
       <p style={style}>Hello, I'm {person.name}.</p>
       <p style={{ backgroundColor: "yellow", color: "black" }}>
         I'm {person.age} years old.
       </p>
       <p>I study in class {person.class}.</p>
+
+      <Counter></Counter>
+
+      <Users></Users>
+
       <Person name="Fahiyan Ahmed" dBirth="2010"></Person>
       <Person name={names[0]} dBirth="1996"></Person>
-      <Person name="Jyan" dBirth="2019"></Person>
-      <Person name="Ryan" dBirth="2014"></Person>
+
       <Product name={products[0].name} price={products[0].price}></Product>
       <Product name={products[1].name} price={products[1].price}></Product>
 
       {products.map((product) => (
         <Product name={product.name} price={product.price}></Product>
       ))}
+    </div>
+  );
+}
+
+function Users() {
+  const [users, setUsers] = useState();
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+  return (
+    <div>
+      {users.map((user) => (
+        <h2>{user.name}</h2>
+      ))}
+      {console.log(users)}
+    </div>
+  );
+}
+
+function Counter() {
+  const [count, setCount] = useState(1);
+  const decreaseVal = () => {
+    setCount(count - 1);
+  };
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <button onClick={count > 0 ? decreaseVal : alert("No value there")}>
+        Decrease
+      </button>
     </div>
   );
 }
